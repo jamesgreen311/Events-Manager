@@ -1,0 +1,76 @@
+<script>
+  // global
+  var uploadsLeft = parseInt(document.getElementById('limit').innerText);
+
+  document.addEventListener("DOMContentLoaded", pageLoaded);
+  document.getElementById('btnSave').addEventListener("click", serializeAndSave);
+  document.getElementById('frmMain').addEventListener("submit", stopSubmit);
+
+  function pageLoaded() {
+    google.script.run.withSuccessHandler(setCopyrightYear).getCurrentYear();
+    google.script.run.withSuccessHandler(closeSession).getSessionStatus();
+  }
+
+  function serializeAndSave() {
+    let d = new Date();
+    let ln = document.getElementById('lastName');
+    let fn = document.getElementById('firstName');
+    let e = document.getElementById('email');
+    let q = document.getElementById('question');
+
+    if (allFieldsValid()) {
+      document.getElementById('messageAlert').style.display = "none";
+      google.script.run.withSuccessHandler(saveFormSuccess).saveToSheet(data);
+    } else {
+      return false;
+    }
+
+  }
+
+  function saveFormSuccess(e) {
+    showDone();
+  }
+
+  function showDone() {
+    google.script.run.showDone();
+  }
+
+  function stopSubmit(e) {
+    e.preventDefault();
+    return false;
+  }
+
+  function allFieldsValid() {
+    let inputs = document.querySelectorAll('input');
+    let invalidCount = 0;
+
+    inputs.forEach(function (input) {
+      if (!input.validity.valid) {
+        invalidCount++;
+      }
+    })
+    return invalidCount == 0;
+  }
+
+  function setCopyrightYear(yr) {
+    document.getElementById('copyrightYear').innerHTML = `Copyright &copy; ${yr}`;
+  }
+
+  function closeSession(state) {
+    if (state === "Closed") {
+      document.getElementById('sessionStatusMessage').innerHTML = "Sign Up for this month's event is now <span class='badge badge-danger'>Closed</span>";
+      document.getElementById('btnSave').disabled = true;
+    }
+  }
+</script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+  integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+  integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+</script>
