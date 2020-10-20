@@ -1,0 +1,12 @@
+<script>
+  document.addEventListener("DOMContentLoaded", pageLoaded);
+
+  function pageLoaded() {
+    /* Add page initialization here */
+    google.script.run.withSuccessHandler(setCopyrightYear).getCurrentYear();
+  }
+
+  function setCopyrightYear(yr) {
+    document.getElementById("copyrightYear").innerHTML = `Copyright &copy; ${yr}`;
+  }
+</script>
