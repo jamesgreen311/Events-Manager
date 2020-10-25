@@ -19,25 +19,54 @@
   <?!= include("Includes/html/header"); ?>
   <div class="content">
     <div class="container mraa-container pt-3">
-      <h1>{Event Title} </h1>
-      <h5>Sign Up Sheet</h5>
-      <h5>* <span class="badge badge-secondary">Required</span></h5>
+      <h1 class="mraa-header"><?= getTitle(); ?></h1>
+      <h2 class="mraa-sub-header"><?= getSubTitle(); ?></h2>
+
       <div id="aboutSection" class="mraa-callout mraa-callout-primary">
         <div class="row">
           <div class="col-6">
             <p>
-              {Event Start Date Time}
+              <?= getStart(); ?>
             </p>
-            <p>{Event Location} </p>
           </div>
           <div class="col-6">
-            <p>Programs Chair: {Program Chair Name and Email}</p>
+            <p>Programs Chair: <a href="mailto:<?= getContactEmail(); ?>"> <?= getContactName(); ?> </a></p>
           </div>
+        </div>
+        <div class="row">
           <div class="col-12">
-            {Opening Remarks}
+            <p>Meeting Location: <?= getLocation(); ?> </p>
           </div>
-          <div class="col-12">
-            {Event Details}
+        </div>
+        <div class="row">
+          <div class="col-12 small">
+            <? 
+              let remarks = getOpening(); 
+              remarks.forEach(function(r){
+            ?>
+            <p>
+              <?= r ?>
+            </p>
+            <? }) ?>
+          </div>
+          <div class="col-12 small">
+            <h3>
+              Event Details
+            </h3>
+            <ul>
+            <? 
+              let details = getDetails(); 
+              details.forEach(function(r){
+            ?>
+              <? if (r === "") { ?>
+              <p></p>
+              <? } else { ?>
+                <li>
+                  <?= r ?>
+                </li>
+              <? } ?>
+            <? }) ?>
+          </ul>
           </div>
         </div>
         <div class="row">
@@ -57,6 +86,7 @@
           </div>
         </div>
       </div>
+      <h5 class="text-right">* <span class="badge badge-secondary">Required</span></h5>
       <form id="frmMain">
         <div class="form-group">
           <div class="input-group mb-3">
@@ -94,8 +124,8 @@
             <hr>
             <div>
               <button class="btn btn-primary mraa-button-primary mr-3" id="btnSave">Send to MRAA</button>
-              <a href="<?= ScriptApp.getService().getUrl(); ?>?v=done" id="btnDone" class="btn btn-secondary"
-                target="_top">Done</a>
+<!--               <a href="<?= ScriptApp.getService().getUrl(); ?>?v=done" id="btnDone" 
+                target="_top">When Finished Go Here</a> -->
             </div>
           </div>
         </div>
