@@ -70,12 +70,17 @@
           </div>
         </div>
         <div class="row">
-
           <div class="col-4">
-            <h5>Seats Available: <span class="badge badge-primary"></span></h5>
+            <h5>Seating Limit: <span class="badge badge-primary"><?= getMax(); ?></span></h5>
           </div>
           <div class="col-4">
-            <h5>Total Signed Up: <span class="badge badge-primary"></span></h5>
+            <h5>Seats Available: <span class="badge badge-primary">
+              <? let avail = getMax() - getCount() ?>
+              <?= avail>=0?avail:0 ?>
+            </span></h5>
+          </div>
+          <div class="col-4">
+            <h5>Total Signed Up: <span class="badge badge-primary"><?= getCount(); ?></span></h5>
           </div>
 
         </div>
