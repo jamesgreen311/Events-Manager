@@ -1,7 +1,12 @@
-function testGetTitle() {
-    console.log(getTitle());
+function testGetAllEventIds() {
+    console.log(getAllEventIds());
 }
 
+function testGetTitle() {
+    let title = getTitleById('2F5CB12');
+  //    console.log(getTitle());
+  }
+  
 function testGetStart() {
     let v = getStart();
     console.log(getStart());

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+
+    <title>MRAA Event List</title>
+    <?!= include("Includes/css/global"); ?>
+</head>
+
+<body>
+    <?!= include("Includes/html/header"); ?>
+
+    <div class="content">
+        <div class="container mraa-container pt-3 pb-3">
+            <h1 class="mraa-header">MRAA Event List</h1>
+            <h2 class="mraa-sub-header mb-3">Current and Planned Events</h2>
+    <? let evt = getAllEventIds(); 
+    for (let i=0; i<evt.length; i++) {  
+        let status = getStatusById(evt[i]);
+        ?>
+            <div class="row mb-4">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <?= getTitleById(evt[i]); ?>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><?= getSubTitleById(evt[i]); ?></h5>
+                            <p class="card-text"><?= getLocationById(evt[i]); ?></p>
+                            <? if (status === "Open") { ?>
+                            <a href="<?= ScriptApp.getService().getUrl(); ?>?v=2F5CB12"
+                                class="btn btn-primary mraa-button-primary">Sign Up</a>
+                            <? } ?>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <? if (status === "Planned") { ?>
+                                Upcoming
+                            <? } else { ?>
+                                Now Registering
+                            <? } ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3"></div>
+            </div>
+    <? } ?>
+        </div>
+    </div>
+
+    <?!= include("Includes/html/footer"); ?>
+    <?!= include("Includes/scripts/global"); ?>
+</body>
+
+</html>
