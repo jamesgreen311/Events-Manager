@@ -4,16 +4,18 @@
     The controller responds to the user input and performs interactions on the data model objects. 
     The controller receives the input, optionally validates it and then passes the input to the model.
 */
-var Route = {};
+let Route = {};
 Route.path = function(r, callback) {
   Route[r] = callback;
 }
 
 function doGet(e) {
     Route.path("done", showDone);
-  
-    var r;
-    if (Route[e.parameter.v]) {
+
+    let r;
+    if (e.parameter.v === "reg") {
+      r = showForm(e.parameter.id);
+    } else if (Route[e.parameter.v]) {
       r = Route[e.parameter.v]();
     } else {
       // default to main page
@@ -34,4 +36,12 @@ function saveToSheet(data) {
 
 function showDone() {
   return render(`${pageRoot}/ThankYou`);
+}
+
+function showForm(id) {
+  let options = {
+    evt: id
+  };
+
+  return render(`${pageRoot}/Form`, options);
 }

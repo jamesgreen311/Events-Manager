@@ -23,7 +23,7 @@
     <? let evt = getAllEventIds(); 
     for (let i=0; i<evt.length; i++) {  
         let status = getStatusById(evt[i]);
-        ?>
+    ?>
             <div class="row mb-4">
                 <div class="col-3"></div>
                 <div class="col-6">
@@ -35,15 +35,17 @@
                             <h5 class="card-title"><?= getSubTitleById(evt[i]); ?></h5>
                             <p class="card-text"><?= getLocationById(evt[i]); ?></p>
                             <? if (status === "Open") { ?>
-                            <a href="<?= ScriptApp.getService().getUrl(); ?>?v=2F5CB12"
+                            <a href="<?= ScriptApp.getService().getUrl(); ?>?v=reg&id=<?= evt[i] ?>"
                                 class="btn btn-primary mraa-button-primary">Sign Up</a>
                             <? } ?>
                         </div>
                         <div class="card-footer text-muted">
                             <? if (status === "Planned") { ?>
                                 Upcoming
+                            <? } else if (status === "Open") { ?>
+                                Registration Open
                             <? } else { ?>
-                                Now Registering
+                                Registration Closed
                             <? } ?>
                         </div>
                     </div>
