@@ -5,7 +5,7 @@ Target Config Sheet retrieved as config in privateSettings.js
 */
 
 ConfigDataMap = {
-  id: "a2",
+  id: "a2:a",
   title: "b2",
   subtitle: "c2",
   start: "d2",
