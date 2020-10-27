@@ -1,6 +1,6 @@
 const config = connect().getSheetByName("Config");
 const evtMaster = connect().getSheetByName("Event Master");
-const evtRemarks = connect().getSheetByName("Event Description");
+const evtDescription = connect().getSheetByName("Event Description");
 const evtDetails = connect().getSheetByName("Event Details");
 
 /*
@@ -32,7 +32,8 @@ EventMasterDataMap = {
     location: "g2:g",
     max: "h2:h",
     contactName: "i2:i",
-    contactEmail: "j2:j"
+    contactEmail: "j2:j",
+    all: "a2:j"
 }
 
 function getAllEventIds() {
@@ -45,7 +46,7 @@ function getTitleById(evt) {
     let title;
     if (evt) {
         
-        let data = evtMaster.getRange("a2:j"+evtMaster.getLastRow()).getValues();
+        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getValues();
         filteredData = data.filter(r => r[0] === evt);
     } 
     if (filteredData.length>0) {
@@ -54,16 +55,12 @@ function getTitleById(evt) {
     return title;
 }
 
-function getTitle() {
-    return evtMaster.getRange(EventMasterDataMap.title).getValue();
-}
-
 function getSubTitleById(evt) {
     let filteredData;
     let subtitle;
     if (evt) {
         
-        let data = evtMaster.getRange("a2:j"+evtMaster.getLastRow()).getValues();
+        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getValues();
         filteredData = data.filter(r => r[0] === evt);
     } 
     if (filteredData.length>0) {
@@ -72,16 +69,32 @@ function getSubTitleById(evt) {
     return subtitle;
 }
 
-function getSubTitle() {
-    return config.getRange(ConfigDataMap.subtitle).getValue();
+function getStartById(evt) {
+    let filteredData;
+    let start;
+    if (evt) {
+        
+        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getDisplayValues();
+        filteredData = data.filter(r => r[0] === evt);
+    } 
+    if (filteredData.length>0) {
+        start = filteredData[0][4];
+    }
+    return start;
 }
 
-function getStart() {
-    return config.getRange(ConfigDataMap.start).getDisplayValue();
-}
-
-function getEnd() {
-    return config.getRange(ConfigDataMap.end).getDisplayValue();
+function getEndById(evt) {
+    let filteredData;
+    let end;
+    if (evt) {
+        
+        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getDisplayValues();
+        filteredData = data.filter(r => r[0] === evt);
+    } 
+    if (filteredData.length>0) {
+        end = filteredData[0][5];
+    }
+    return end;
 }
 
 function getLocationById(evt) {
@@ -89,7 +102,7 @@ function getLocationById(evt) {
     let location;
     if (evt) {
         
-        let data = evtMaster.getRange("a2:j"+evtMaster.getLastRow()).getValues();
+        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getValues();
         filteredData = data.filter(r => r[0] === evt);
     } 
     if (filteredData.length>0) {
@@ -98,28 +111,74 @@ function getLocationById(evt) {
     return location;
 }
 
-function getLocation() {
-    return config.getRange(ConfigDataMap.location).getValue();
+function getDescriptionById(evt) {
+    let filteredData;
+    let description;
+    if (evt) {
+        
+        let data = evtDescription.getRange("a2:b"+evtDescription.getLastRow()).getValues();
+        filteredData = data.filter(r => r[0] === evt);
+    } 
+    if (filteredData.length>0) {
+        description = filteredData.map(r => r[1]);
+    }
+    return description;
 }
 
-function getOpening() {
-    return config.getRange(ConfigDataMap.opening+config.getLastRow()).getValues().map(el => el[0]);
+function getDetailsById(evt) {
+    let filteredData;
+    let details;
+    if (evt) {
+        
+        let data = evtDetails.getRange("a2:b"+evtDetails.getLastRow()).getValues();
+        filteredData = data.filter(r => r[0] === evt);
+    } 
+    if (filteredData.length>0) {
+        details = filteredData.map(r => r[1]);
+    }
+    return details;
 }
 
-function getDetails() {
-    return config.getRange(ConfigDataMap.details+config.getLastRow()).getValues().map(el => el[0]);
+function getMaxById(evt) {
+    let filteredData;
+    let max;
+    if (evt) {
+        
+        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getValues();
+        filteredData = data.filter(r => r[0] === evt);
+    } 
+    if (filteredData.length>0) {
+        max = filteredData[0][7];
+    }
+    return max;
 }
 
-function getMax() {
-    return config.getRange(ConfigDataMap.max).getValue();
+function getContactNameById(evt) {
+    let filteredData;
+    let contactName;
+    if (evt) {
+        
+        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getDisplayValues();
+        filteredData = data.filter(r => r[0] === evt);
+    } 
+    if (filteredData.length>0) {
+        contactName = filteredData[0][8];
+    }
+    return contactName;
 }
 
-function getContactName() {
-    return config.getRange(ConfigDataMap.contactName).getValue();
-}
-
-function getContactEmail() {
-    return config.getRange(ConfigDataMap.contactEmail).getValue();
+function getContactEmailById(evt) {
+    let filteredData;
+    let contactEmail;
+    if (evt) {
+        
+        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getDisplayValues();
+        filteredData = data.filter(r => r[0] === evt);
+    } 
+    if (filteredData.length>0) {
+        contactEmail = filteredData[0][9];
+    }
+    return contactEmail;
 }
 
 function getStatusById(evt) {
@@ -127,15 +186,11 @@ function getStatusById(evt) {
     let status;
     if (evt) {
         
-        let data = evtMaster.getRange("a2:j"+evtMaster.getLastRow()).getDisplayValues();
+        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getDisplayValues();
         filteredData = data.filter(r => r[0] === evt);
     } 
     if (filteredData.length>0) {
         status = filteredData[0][1];
     }
     return status;
-}
-
-function getEventStatus() {
-    return config.getRange(ConfigDataMap.eventStatus).getValue();
 }

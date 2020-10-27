@@ -26,23 +26,23 @@
         <div class="row">
           <div class="col-6">
             <p>
-              <?= getStart(); ?>
+              <?= getStartById(evt); ?>
             </p>
           </div>
           <div class="col-6">
-            <p>Programs Chair: <a href="mailto:<?= getContactEmail(); ?>"> <?= getContactName(); ?> </a></p>
+            <p>Event Contact: <a href="mailto:<?= getContactEmailById(evt); ?>"> <?= getContactNameById(evt); ?> </a></p>
           </div>
         </div>
         <div class="row">
           <div class="col-12">
-            <p>Meeting Location: <?= getLocation(); ?> </p>
+            <p>Meeting Location: <strong><?= getLocationById(evt); ?></strong> </p>
           </div>
         </div>
         <div class="row">
           <div class="col-12 small">
             <? 
-              let remarks = getOpening(); 
-              remarks.forEach(function(r){
+              let description = getDescriptionById(evt); 
+              description.forEach(function(r){
             ?>
             <p>
               <?= r ?>
@@ -55,7 +55,7 @@
             </h3>
             <ul>
             <? 
-              let details = getDetails(); 
+              let details = getDetailsById(evt); 
               details.forEach(function(r){
             ?>
               <? if (r === "") { ?>
@@ -71,16 +71,19 @@
         </div>
         <div class="row">
           <div class="col-4">
-            <h5>Seating Limit: <span class="badge badge-primary"><?= getMax(); ?></span></h5>
+            <h5>Seating Limit: <span class="badge badge-primary"><?= getMaxById(evt); ?></span></h5>
           </div>
           <div class="col-4">
             <h5>Seats Available: <span class="badge badge-primary">
-              <? let avail = getMax() - getCount() ?>
+              <? 
+              let c = getCountById(evt);
+              let avail = getMaxById(evt) - c 
+              ?>
               <?= avail>=0?avail:0 ?>
             </span></h5>
           </div>
           <div class="col-4">
-            <h5>Total Signed Up: <span class="badge badge-primary"><?= getCount(); ?></span></h5>
+            <h5>Total Signed Up: <span class="badge badge-primary"><?= c ?></span></h5>
           </div>
 
         </div>

@@ -2,6 +2,14 @@ function testGetAllEventIds() {
     console.log(getAllEventIds());
 }
 
+function testGetOpeningById() {
+    let openings = getOpeningById('2F5CB12');
+}
+
+function testGetCountById() {
+    let count = getCountById('2F5CB12');
+}
+
 function testGetTitle() {
     let title = getTitleById('2F5CB12');
   //    console.log(getTitle());

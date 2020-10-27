@@ -12,9 +12,18 @@ DataMap = {
     email: "d2",
     phone: "e2",
     comments: "f2",
-    count: "h2" // calculated
-    }
+    countById: "h2:i"
+}
 
-function getCount() {
-    return data.getRange(DataMap.count).getValue();
+function getCountById(evt) {
+    let filteredData;
+    let count;
+    if (evt) {
+        let d = data.getRange(DataMap.countById+data.getLastRow()).getValues();
+        filteredData = d.filter(r => r[0] === evt);
+    } 
+    if (filteredData.length>0) {
+        count = filteredData[0][1];
+    }
+    return count;
 }
