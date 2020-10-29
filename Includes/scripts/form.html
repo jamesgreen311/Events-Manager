@@ -34,6 +34,10 @@
 
   function saveFormSuccess(e) {
     document.getElementById('loading').style.display = "none";
+    document.getElementById('main').innerHTML = "";
+    document.getElementById('done').style.display = "block";
+
+    /* google.script.run.showDone(); */
   }
 
   function stopSubmit(e) {

@@ -17,7 +17,7 @@
 
 <body id='page' data-evt='<?= evt ?>' data-title='<?= title = getTitleById(evt);?>'>
   <?!= include("Includes/html/header"); ?>
-  <div class="content">
+  <div class="content" id="main">
     <div class="container mraa-container pt-3">
       <h1 class="mraa-header"><?= title ?></h1>
       <h2 class="mraa-sub-header"><?= getSubTitleById(evt); ?></h2>
@@ -30,7 +30,8 @@
             </p>
           </div>
           <div class="col-6">
-            <p>Event Contact: <a href="mailto:<?= getContactEmailById(evt); ?>"> <?= getContactNameById(evt); ?> </a></p>
+            <p>Event Contact: <a href="mailto:<?= getContactEmailById(evt); ?>"> <?= getContactNameById(evt); ?> </a>
+            </p>
           </div>
         </div>
         <div class="row">
@@ -54,19 +55,19 @@
               Event Details
             </h3>
             <ul>
-            <? 
+              <? 
               let details = getDetailsById(evt); 
               details.forEach(function(r){
             ?>
               <? if (r === "") { ?>
               <p></p>
               <? } else { ?>
-                <li>
-                  <?= r ?>
-                </li>
+              <li>
+                <?= r ?>
+              </li>
               <? } ?>
-            <? }) ?>
-          </ul>
+              <? }) ?>
+            </ul>
           </div>
         </div>
         <div class="row">
@@ -75,12 +76,12 @@
           </div>
           <div class="col-4">
             <h5>Seats Available: <span class="badge badge-primary p-2">
-              <? 
+                <? 
               let c = getCountById(evt);
               let avail = getMaxById(evt) - c 
               ?>
-              <?= avail>=0?avail:0 ?>
-            </span></h5>
+                <?= avail>=0?avail:0 ?>
+              </span></h5>
           </div>
           <div class="col-4">
             <h5>Total Signed Up: <span class="badge badge-primary p-2"><?= c ?></span></h5>
@@ -138,8 +139,6 @@
             <hr>
             <div>
               <button class="btn btn-primary mraa-button-primary mr-3" id="btnSave">Send to MRAA</button>
-<!--               <a href="<?= ScriptApp.getService().getUrl(); ?>?v=done" id="btnDone" 
-                target="_top">When Finished Go Here</a> -->
             </div>
           </div>
         </div>
@@ -166,6 +165,18 @@
     </div>
     <div class="pt-3 text-center">Saving...</div>
   </div>
+
+  <div class="content" id="done" style="display: none;">
+    <div class="container mt-4 mb-2">
+      <header class="entry-header">
+        THANK YOU
+      </header>
+      <hr>
+      <div class="text-center mb-4"><img src="https://metrorichmondart.org/wp-content/uploads/2020/02/mraa-logo-sm.png">
+      </div>
+    </div>
+  </div>
+
   <?!= include("Includes/html/footer"); ?>
   <?!= include("Includes/scripts/global"); ?>
   <?!= include("Includes/scripts/form"); ?>
