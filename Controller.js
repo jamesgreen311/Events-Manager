@@ -26,11 +26,9 @@ function doGet(e) {
 }
 
 function saveToSheet(data) {
-    let d = getDataSheet();
-    data.push(today.toString());
-    d.appendRow(data);
-    /* sendNotification(data); */
-    //Logger.log(data);
+    let today = new Date();
+    data.push(today);
+    eventData.appendRow(data);
     return true;
 }
 

@@ -1,25 +1,30 @@
 <script>
   // global
-  var uploadsLeft = parseInt(document.getElementById('limit').innerText);
-
   document.addEventListener("DOMContentLoaded", pageLoaded);
-  document.getElementById('btnSave').addEventListener("click", serializeAndSave);
-  document.getElementById('frmMain').addEventListener("submit", stopSubmit);
 
   function pageLoaded() {
+    evt = document.getElementById('page').dataset.evt;
+    document.getElementById('btnSave').addEventListener("click", serializeAndSave);
+    document.getElementById('frmMain').addEventListener("submit", stopSubmit);
     google.script.run.withSuccessHandler(setCopyrightYear).getCurrentYear();
-    google.script.run.withSuccessHandler(closeSession).getSessionStatus();
+    google.script.run.withSuccessHandler(closeSession).getStatusById(evt);
   }
 
   function serializeAndSave() {
-    let d = new Date();
+    let page = document.getElementById('page');
+    let evt = page.dataset.evt;
+    let title = page.dataset.title;
     let ln = document.getElementById('lastName');
     let fn = document.getElementById('firstName');
-    let e = document.getElementById('email');
+    let e = document.getElementById('emailAddress');
+    let ph = document.getElementById('phoneNumber');
     let q = document.getElementById('question');
+
+    let data = [evt, title, fn.value, ln.value, e.value, ph.value, q.value];
 
     if (allFieldsValid()) {
       document.getElementById('messageAlert').style.display = "none";
+      document.getElementById('loading').style.display = "block";
       google.script.run.withSuccessHandler(saveFormSuccess).saveToSheet(data);
     } else {
       return false;
@@ -28,11 +33,7 @@
   }
 
   function saveFormSuccess(e) {
-    showDone();
-  }
-
-  function showDone() {
-    google.script.run.showDone();
+    document.getElementById('loading').style.display = "none";
   }
 
   function stopSubmit(e) {
@@ -48,7 +49,7 @@
       if (!input.validity.valid) {
         invalidCount++;
       }
-    })
+    });
     return invalidCount == 0;
   }
 
@@ -58,7 +59,8 @@
 
   function closeSession(state) {
     if (state === "Closed") {
-      document.getElementById('sessionStatusMessage').innerHTML = "Sign Up for this month's event is now <span class='badge badge-danger'>Closed</span>";
+      document.getElementById('sessionStatusMessage').innerHTML =
+        "Sign Up for this month's event is now <span class='badge badge-danger'>Closed</span>";
       document.getElementById('btnSave').disabled = true;
     }
   }

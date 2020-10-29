@@ -1,4 +1,4 @@
-const data = connect().getSheetByName("Event");
+const eventData = connect().getSheetByName("Event");
 
 /**
 *
@@ -12,18 +12,18 @@ DataMap = {
     email: "d2",
     phone: "e2",
     comments: "f2",
-    countById: "h2:i"
+    countById: "i2:j"
 }
 
 function getCountById(evt) {
     let filteredData;
-    let count;
+    let count=0;
     if (evt) {
-        let d = data.getRange(DataMap.countById+data.getLastRow()).getValues();
+        let d = eventData.getRange(DataMap.countById+eventData.getLastRow()).getValues();
         filteredData = d.filter(r => r[0] === evt);
     } 
     if (filteredData.length>0) {
         count = filteredData[0][1];
     }
-    return count;
+    return count>=0?count:0;
 }
