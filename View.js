@@ -11,7 +11,7 @@ function render(f, opt) {
   let templ = HtmlService.createTemplateFromFile(f);
   if (opt) {
     let keys = Object.keys(opt);
-    keys.forEach(function(k){
+    keys.forEach(function (k) {
       templ[k] = opt[k];
     })
 
