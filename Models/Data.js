@@ -1,4 +1,5 @@
 const eventData = connect().getSheetByName("Event");
+const eventCounts = connect().getSheetByName("Event Registration Counts");
 
 /**
 *
@@ -15,15 +16,20 @@ DataMap = {
     countById: "i2:j"
 }
 
+CountMap = {
+    count: "a2:b"
+}
+
 function getCountById(evt) {
     let filteredData;
     let count=0;
     if (evt) {
-        let d = eventData.getRange(DataMap.countById+eventData.getLastRow()).getValues();
+        let d = eventCounts.getRange(CountMap.count+eventCounts.getLastRow()).getValues();
         filteredData = d.filter(r => r[0] === evt);
     } 
     if (filteredData.length>0) {
         count = filteredData[0][1];
     }
+
     return count>=0?count:0;
 }

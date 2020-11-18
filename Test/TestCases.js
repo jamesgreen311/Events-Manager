@@ -1,17 +1,19 @@
+let testEvent = '2F5CB12';
+
 function testGetAllEventIds() {
     console.log(getAllEventIds());
 }
 
 function testGetOpeningById() {
-    let openings = getOpeningById('2F5CB12');
+    let openings = getOpeningById(testEvent);
 }
 
 function testGetCountById() {
-    let count = getCountById('2F5CB12');
+    let count = getCountById(testEvent);
 }
 
 function testGetTitle() {
-    let title = getTitleById('2F5CB12');
+    let title = getTitleById(testEvent);
   //    console.log(getTitle());
   }
   
@@ -58,4 +60,10 @@ function testGetContactEmail() {
 function testGetEventStatus() {
     let v = getEventStatus();
     console.log(getEventStatus());
+}
+
+function testAvailableSeats() {
+    let c = getCountById(testEvent);
+    let avail = getMaxById(testEvent) - c;
+    console.log(avail);
 }
