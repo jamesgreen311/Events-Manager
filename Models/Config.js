@@ -8,24 +8,32 @@ Target Config Sheet retrieved as config in privateSettings.js
 */
 
 ConfigDataMap = {
-  status: "a2:a"
+    status: "a2:a"
 }
 const validStatusList = config.getRange(ConfigDataMap.status);
 const statusRule = SpreadsheetApp.newDataValidation().requireValueInRange(validStatusList, true).build();
 
 EventMasterDataMap = {
     id: "a2:a",
-    idCol: "a",
+    idCol: "1",
     eventStatus: "b2:b",
     eventStatusCol: "2",
     title: "c2:c",
+    titleCol: "3",
     subtitle: "d2:d",
+    subtitleCol: "4",
     start: "e2:e",
+    startCol: "5",
     end: "f2:f",
+    endCol: "6",
     location: "g2:g",
+    locationCol: "7",
     max: "h2:h",
+    maxCol: "8",
     contactName: "i2:i",
+    contactNameCol: "9",
     contactEmail: "j2:j",
+    contactEmailCol: "10",
     all: "a2:j"
 }
 
@@ -34,85 +42,47 @@ function getAllEventIds() {
     return all.map(r => r[0]);
 }
 
+function getStatusById(evt) {
+    return getColumnByEventId(EventMasterDataMap.eventStatusCol - 1, evt);
+}
+
 function getTitleById(evt) {
-    let filteredData;
-    let title;
-    if (evt) {
-        
-        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getValues();
-        filteredData = data.filter(r => r[0] === evt);
-    } 
-    if (filteredData.length>0) {
-        title = filteredData[0][2];
-    }
-    return title;
+    return getColumnByEventId(EventMasterDataMap.titleCol - 1, evt);
 }
 
 function getSubTitleById(evt) {
-    let filteredData;
-    let subtitle;
-    if (evt) {
-        
-        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getValues();
-        filteredData = data.filter(r => r[0] === evt);
-    } 
-    if (filteredData.length>0) {
-        subtitle = filteredData[0][3];
-    }
-    return subtitle;
+    return getColumnByEventId(EventMasterDataMap.subtitleCol - 1, evt);
 }
 
 function getStartById(evt) {
-    let filteredData;
-    let start;
-    if (evt) {
-        
-        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getDisplayValues();
-        filteredData = data.filter(r => r[0] === evt);
-    } 
-    if (filteredData.length>0) {
-        start = filteredData[0][4];
-    }
-    return start;
+    return getColumnByEventId(EventMasterDataMap.startCol - 1, evt);
 }
 
 function getEndById(evt) {
-    let filteredData;
-    let end;
-    if (evt) {
-        
-        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getDisplayValues();
-        filteredData = data.filter(r => r[0] === evt);
-    } 
-    if (filteredData.length>0) {
-        end = filteredData[0][5];
-    }
-    return end;
+    return getColumnByEventId(EventMasterDataMap.endCol - 1, evt);
 }
 
 function getLocationById(evt) {
-    let filteredData;
-    let location;
-    if (evt) {
-        
-        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getValues();
-        filteredData = data.filter(r => r[0] === evt);
-    } 
-    if (filteredData.length>0) {
-        location = filteredData[0][6];
-    }
-    return location;
+    return getColumnByEventId(EventMasterDataMap.locationCol - 1, evt);
+}
+
+function getContactNameById(evt) {
+    return getColumnByEventId(EventMasterDataMap.contactNameCol - 1, evt);
+}
+
+function getContactEmailById(evt) {
+    return getColumnByEventId(EventMasterDataMap.contactEmailCol - 1, evt);
 }
 
 function getDescriptionById(evt) {
     let filteredData;
     let description;
     if (evt) {
-        
-        let data = evtDescription.getRange("a2:b"+evtDescription.getLastRow()).getValues();
+
+        let data = evtDescription.getRange("a2:b" + evtDescription.getLastRow()).getValues();
         filteredData = data.filter(r => r[0] === evt);
-    } 
-    if (filteredData.length>0) {
+    }
+    if (filteredData.length > 0) {
         description = filteredData.map(r => r[1]);
     }
     return description;
@@ -122,11 +92,11 @@ function getDetailsById(evt) {
     let filteredData;
     let details;
     if (evt) {
-        
-        let data = evtDetails.getRange("a2:b"+evtDetails.getLastRow()).getValues();
+
+        let data = evtDetails.getRange("a2:b" + evtDetails.getLastRow()).getValues();
         filteredData = data.filter(r => r[0] === evt);
-    } 
-    if (filteredData.length>0) {
+    }
+    if (filteredData.length > 0) {
         details = filteredData.map(r => r[1]);
     }
     return details;
@@ -136,56 +106,28 @@ function getMaxById(evt) {
     let filteredData;
     let max;
     if (evt) {
-        
-        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getValues();
+
+        let data = evtMaster.getRange(EventMasterDataMap.all + evtMaster.getLastRow()).getValues();
         filteredData = data.filter(r => r[0] === evt);
-    } 
-    if (filteredData.length>0) {
+    }
+    if (filteredData.length > 0) {
         max = filteredData[0][7];
     }
     return max;
 }
 
-function getContactNameById(evt) {
+function getColumnByEventId(col, evt) {
     let filteredData;
-    let contactName;
+    let columnData;
     if (evt) {
-        
-        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getDisplayValues();
-        filteredData = data.filter(r => r[0] === evt);
-    } 
-    if (filteredData.length>0) {
-        contactName = filteredData[0][8];
-    }
-    return contactName;
-}
 
-function getContactEmailById(evt) {
-    let filteredData;
-    let contactEmail;
-    if (evt) {
-        
-        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getDisplayValues();
+        let data = evtMaster.getRange(EventMasterDataMap.all + evtMaster.getLastRow()).getDisplayValues();
         filteredData = data.filter(r => r[0] === evt);
-    } 
-    if (filteredData.length>0) {
-        contactEmail = filteredData[0][9];
     }
-    return contactEmail;
-}
-
-function getStatusById(evt) {
-    let filteredData;
-    let status;
-    if (evt) {
-        
-        let data = evtMaster.getRange(EventMasterDataMap.all+evtMaster.getLastRow()).getDisplayValues();
-        filteredData = data.filter(r => r[0] === evt);
-    } 
-    if (filteredData.length>0) {
-        status = filteredData[0][1];
+    if (filteredData.length > 0) {
+        columnData = filteredData[0][col];
     }
-    return status;
+    return columnData;
 }
 
 function addNewEvent(evt) {
@@ -193,24 +135,24 @@ function addNewEvent(evt) {
     row[0] = evt;
     try {
         evtMaster.appendRow(row);
-        let newStatusCell = evtMaster.getRange(evtMaster.getLastRow(), EventMasterDataMap.eventStatusCol);  
+        let newStatusCell = evtMaster.getRange(evtMaster.getLastRow(), EventMasterDataMap.eventStatusCol);
         newStatusCell.setDataValidation(statusRule).setValue("Planned");
 
-    } catch(err) {
+    } catch (err) {
         console.error(`Could not add new event to Config tab, ${err}`);
         return false;
     }
     return true;
 }
 
-function createNewEvent(count=1) {
+function createNewEvent(count = 1) {
     let r = true;
-    for (c=1; c<=count; c++) {
+    for (c = 1; c <= count; c++) {
         try {
             r = addNewEvent(makeAnId());
-        } catch(err) {
+        } catch (err) {
             r = false;
         }
     }
     return r;
-  }
+}

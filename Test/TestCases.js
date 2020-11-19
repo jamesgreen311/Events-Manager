@@ -14,22 +14,27 @@ function testGetCountById() {
 
 function testGetTitle() {
     let title = getTitleById(testEvent);
-  //    console.log(getTitle());
-  }
+    console.log(title);
+}
   
+function testGetSubTitle() {
+    let subtitle = getSubTitleById(testEvent);
+    console.log(subtitle);
+}
+
 function testGetStart() {
-    let v = getStart();
-    console.log(getStart());
+    let start = getStartById(testEvent);
+    console.log(start);
 }
 
 function testGetEnd() {
-    let v = getEnd();
-    console.log(getEnd());
+    let end = getEndById(testEvent);
+    console.log(end);
 }
 
 function testGetLocation() {
-    let v = getLocation();
-    console.log(getLocation);
+    let location = getLocationById(testEvent);
+    console.log(location);
 }
 
 function testGetOpening() {
@@ -48,17 +53,17 @@ function testGetMax() {
 }
 
 function testGetContactName() {
-    let v = getContactName();
-    console.log(getContactName());
+    let contactName = getContactNameById(testEvent);
+    console.log(contactName);
 }
 
 function testGetContactEmail() {
-    let v = getContactEmail();
-    console.log(getContactEmail());
+    let contactEmail = getContactEmailById(testEvent);
+    console.log(contactEmail);
 }
 
 function testGetEventStatus() {
-    let v = getEventStatus();
+    let v = getStatusById(testEvent);
     console.log(getEventStatus());
 }
 
