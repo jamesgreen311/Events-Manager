@@ -203,7 +203,14 @@ function addNewEvent(evt) {
     return true;
 }
 
-function createNewEvent() {
-    let newId = makeAnId();
-    return addNewEvent(newId);
+function createNewEvent(count=1) {
+    let r = true;
+    for (c=1; c<=count; c++) {
+        try {
+            r = addNewEvent(makeAnId());
+        } catch(err) {
+            r = false;
+        }
+    }
+    return r;
   }
