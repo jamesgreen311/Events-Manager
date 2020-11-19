@@ -8,23 +8,16 @@ Target Config Sheet retrieved as config in privateSettings.js
 */
 
 ConfigDataMap = {
-  id: "a2:a",
-  title: "b2",
-  subtitle: "c2",
-  start: "d2",
-  end: "e2",
-  location: "f2",
-  opening: "g2:g",
-  details: "h2:h",
-  max: "i2",
-  contactName: "j2",
-  contactEmail: "k2",
-  eventStatus: "l2"
+  status: "a2:a"
 }
+const validStatusList = config.getRange(ConfigDataMap.status);
+const statusRule = SpreadsheetApp.newDataValidation().requireValueInRange(validStatusList, true).build();
 
 EventMasterDataMap = {
     id: "a2:a",
+    idCol: "a",
     eventStatus: "b2:b",
+    eventStatusCol: "2",
     title: "c2:c",
     subtitle: "d2:d",
     start: "e2:e",
@@ -194,3 +187,23 @@ function getStatusById(evt) {
     }
     return status;
 }
+
+function addNewEvent(evt) {
+    let row = [];
+    row[0] = evt;
+    try {
+        evtMaster.appendRow(row);
+        let newStatusCell = evtMaster.getRange(evtMaster.getLastRow(), EventMasterDataMap.eventStatusCol);  
+        newStatusCell.setDataValidation(statusRule).setValue("Planned");
+
+    } catch(err) {
+        console.error(`Could not add new event to Config tab, ${err}`);
+        return false;
+    }
+    return true;
+}
+
+function createNewEvent() {
+    let newId = makeAnId();
+    return addNewEvent(newId);
+  }

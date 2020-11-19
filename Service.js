@@ -19,3 +19,7 @@ function getCurrentYear() {
     y = new Date().getFullYear();
     return y;
 }
+
+function makeAnId() {
+    return Math.floor(Math.random() * Math.floor(100000000)).toString(16).toUpperCase();
+}

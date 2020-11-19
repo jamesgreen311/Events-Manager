@@ -8,6 +8,6 @@ function GENERATEID() {
     let cell = SpreadsheetApp.getActiveSheet().getActiveCell().getDisplayValue();
 
     if (cell !== "") {
-        return Math.floor(Math.random() * Math.floor(100000000)).toString(16).toUpperCase();
+        return makeAnId();
     }
 }

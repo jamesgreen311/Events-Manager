@@ -18,3 +18,21 @@ function render(f, opt) {
   }
   return templ.evaluate().setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
+
+/* 
+  Menu Options
+
+*/
+function onOpen() {
+  let ui = SpreadsheetApp.getUi();
+
+  ui.createMenu('MRAA Options')
+  .addItem('Create a New Event', 'createNewEvent')
+  .addItem('Create Multiple Events', 'showDialog')
+  .addToUi()
+}
+
+function showDialog() {
+  let html = HtmlService.createHtmlOutputFromFile("Pages/CreateEventDialog");
+  SpreadsheetApp.getUi().showModalDialog(html, 'Create New Events');
+}

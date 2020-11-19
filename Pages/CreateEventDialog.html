@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Create Event Dialog</title>
+</head>
+
+<body>
+    <div id="container" class="m-2"><label>How Many Events?</label>
+        <input type="number" min="1" step="1" value="1" id="counter" style="width: 3rem">
+
+        <div>
+            <button type="button" class="btn btn-primary mt-2" id="btnGenerateId">Generate Event Ids</button>
+        </div>
+
+        <div class="alert alert-success mt-3" role="alert" style="display: none;" id="msgBox">
+            <span id="message"></span>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('btnGenerateId').addEventListener('click', createNewId);
+
+        function createNewId() {
+            google.script.run.withSuccessHandler(newEventIdSuccess).createNewEvent();
+        }
+
+        function newEventIdSuccess() {
+            let content = "New event was successfully created.";
+            let msgBox = document.getElementById('msgBox');
+            let msg = document.getElementById('message');
+            msg.innerText = content;
+            msgBox.style.display = "block";
+        }
+    </script>
+</body>
+
+</html>
