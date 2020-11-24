@@ -29,7 +29,7 @@
               <?= getStartById(evt); ?>
               <? let end = getEndById(evt);
               if (end != "") { ?>
-                to <?= end ?>
+              to <?= end ?>
               <? } ?>
             </p>
           </div>
@@ -75,18 +75,26 @@
           </div>
         </div>
         <div class="row">
+
+          <? let max = getMaxById(evt) 
+              if (max) { ?>
           <div class="col-4">
-            <h5>Seating Limit: <span class="badge badge-primary p-2"><?= getMaxById(evt); ?></span></h5>
+            <h5>Seating Limit: <span class="badge badge-primary p-2"><?= max ?></span></h5>
           </div>
+          <? } ?>
+
+          <?  
+            let c = getCountById(evt);
+            let avail = getMaxById(evt) - c 
+          ?>
+          
+          <? if (avail) { ?>
           <div class="col-4">
-            <h5>Seats Available: <span class="badge badge-primary p-2">
-                <? 
-              let c = getCountById(evt);
-              let avail = getMaxById(evt) - c 
-              ?>
-                <?= avail>=0?avail:0 ?>
-              </span></h5>
+            <h5>Seats Available: <span class="badge badge-primary p-2"> <?= avail ?> </span></h5>
           </div>
+          <? } ?>
+
+
           <div class="col-4">
             <h5>Total Signed Up: <span class="badge badge-primary p-2"><?= c ?></span></h5>
           </div>
