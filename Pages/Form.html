@@ -48,31 +48,35 @@
           <div class="col-12 small">
             <? 
               let description = getDescriptionById(evt); 
-              description.forEach(function(r){
+              if (description) {
+                description.forEach(function(r){
             ?>
             <p>
               <?= r ?>
             </p>
-            <? }) ?>
+            <?   }) 
+            }?>
           </div>
           <div class="col-12 small">
             <h3>
               Event Details
             </h3>
-            <ul>
+            <!-- <ul> -->
               <? 
               let details = getDetailsById(evt); 
-              details.forEach(function(r){
-            ?>
+              if (details) {
+                details.forEach(function(r){
+              ?>
               <? if (r === "") { ?>
-              <p></p>
-              <? } else { ?>
-              <li>
-                <?= r ?>
-              </li>
-              <? } ?>
-              <? }) ?>
-            </ul>
+              
+              <?   } else { ?>
+              <!-- <li> -->
+                <p><?= r ?></p>
+              <!-- </li> -->
+              <?   } ?>
+              <? }) 
+              }?>
+            <!-- </ul> -->
           </div>
         </div>
         <div class="row">
