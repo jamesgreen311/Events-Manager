@@ -58,25 +58,25 @@
             }?>
           </div>
           <div class="col-12 small">
+            <?
+              let details = getDetailsById(evt);   
+              if (details) {          
+            ?>
             <h3>
               Event Details
             </h3>
-            <!-- <ul> -->
-              <? 
-              let details = getDetailsById(evt); 
+            <? 
+            }
               if (details) {
                 details.forEach(function(r){
               ?>
-              <? if (r === "") { ?>
-              
-              <?   } else { ?>
-              <!-- <li> -->
-                <p><?= r ?></p>
-              <!-- </li> -->
-              <?   } ?>
-              <? }) 
+            <? if (r === "") { ?>
+            <?   } else { ?>
+            <p><?= r ?></p>
+            <?   } ?>
+            <? }) 
               }?>
-            <!-- </ul> -->
+
           </div>
         </div>
         <div class="row">
@@ -92,7 +92,7 @@
             let c = getCountById(evt);
             let avail = getMaxById(evt) - c 
           ?>
-          
+
           <? if (avail) { ?>
           <div class="col-4">
             <h5>Seats Available: <span class="badge badge-primary p-2"> <?= avail ?> </span></h5>
@@ -115,7 +115,7 @@
 
       <? if (status === 'Open') { ?>
       <?!= include("Includes/html/form"); ?>
-      <? } ?>  
+      <? } ?>
       <div id="messageAlert" class="alert alert-success mt-4 mraa-alert" role="alert" style="display: none;">
         <h4 class="alert-heading">Save Successful</h4>
         <p id="messageContent"></p>
