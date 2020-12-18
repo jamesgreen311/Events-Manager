@@ -4,8 +4,14 @@
 
   function pageLoaded() {
     evt = document.getElementById('page').dataset.evt;
-    document.getElementById('btnSave').addEventListener("click", serializeAndSave);
-    document.getElementById('frmMain').addEventListener("submit", stopSubmit);
+    btn = document.getElementById('btnSave');
+    if (btn) {
+      btn.addEventListener("click", serializeAndSave);
+    }
+    frm = document.getElementById('frmMain');
+    if (frm) {
+      frm.addEventListener("submit", stopSubmit);
+    }
     google.script.run.withSuccessHandler(setCopyrightYear).getCurrentYear();
     google.script.run.withSuccessHandler(closeSession).getStatusById(evt);
   }

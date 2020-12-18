@@ -66,16 +66,20 @@
               Event Details
             </h3>
             <? 
-            }
-              if (details) {
                 details.forEach(function(r){
-              ?>
-            <? if (r === "") { ?>
-            <?   } else { ?>
-            <p><?= r ?></p>
-            <?   } ?>
-            <? }) 
-              }?>
+            ?>
+            <? 
+              if (r === "") { 
+            ?>
+            <?   
+                } else { 
+            ?>
+              <p><?= r.replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>") ?></p>
+            <?  
+                } 
+              }) 
+            }
+            ?>
 
           </div>
         </div>
