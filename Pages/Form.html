@@ -45,17 +45,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-12 small">
-            <? 
-              let description = getDescriptionById(evt); 
-              if (description) {
-                description.forEach(function(r){
-            ?>
-            <p>
-              <?= r ?>
-            </p>
-            <?   }) 
-            }?>
+          <div class="col-12 small mb-2" id="description">
+            Loading . . .
+            <div class="mb-2"></div>
           </div>
           <div class="col-12 small mb-2" id="details">
             Loading . . .
