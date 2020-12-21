@@ -29,6 +29,15 @@ function saveToSheet(data) {
     let today = new Date();
     data.push(today);
     eventData.appendRow(data);
+    evtId = data[0];
+    let eventInfo = {
+      eventTitle: data[1],
+      contactEmail: "",
+      zoomLink: "",
+      // sendTo: data[4],
+      sendTo: "jamesgreen.311@gmail.com" // testing only
+    }
+    sendNotification(eventInfo);
     return true;
 }
 

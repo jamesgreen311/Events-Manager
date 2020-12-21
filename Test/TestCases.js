@@ -72,3 +72,13 @@ function testAvailableSeats() {
     let avail = getMaxById(testEvent) - c;
     console.log(avail);
 }
+
+function testSendNotification() {
+    let eventInfo = {
+        eventTitle: "MRAA January Program",
+        contactEmail: "tech@metrorichmondart.org",
+        zoomLink: "",
+        sendTo: "jamesgreen.311@gmail.com" // testing only
+    }
+    sendNotification(eventInfo);    
+}
