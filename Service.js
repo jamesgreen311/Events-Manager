@@ -13,16 +13,24 @@ function getRangeByName(n) {
 function sendNotification(data) {
     const regForm = "https://script.google.com/macros/s/AKfycbzDUr5Ajpo3MmAP1WQstYazIwp4BsIX9UjAembFd18/exec?v=reg&id=73CB67";
     const eventsPage = "https://metrorichmondart.org/meetings-critiques/";
-    const body = `Thank you for registering for the ${data.eventTitle} <br><br>
+    const cal = ics();
+    cal.addEvent(data.title, data.subtitle, data.location, data.start, data.end);
+    const attach = cal.build();
+    const body = `Thank you for registering for the ${data.title} <br><br>
         For questions please contact ${data.contactEmail} <br><br>
         If you need a reminder about event details, please revisit the <a href='${regForm}'>registration form</a> or the MRAA website 
         <a href='${eventsPage}'>Events page</a>`;
+    const blob = Utilities.newBlob(attach, "text/calendar", "event.ics");
+    //console.log(attach);
     MailApp.sendEmail({
         to: data.sendTo, 
         //bcc: supportEmail,
         replyTo: supportEmail,
         subject: "MRAA Event Registration", 
-        htmlBody: body
+        htmlBody: body,
+        attachments: [
+            blob
+        ]
     });
 }
 
