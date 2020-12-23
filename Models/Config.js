@@ -34,12 +34,22 @@ EventMasterDataMap = {
     contactNameCol: "9",
     contactEmail: "j2:j",
     contactEmailCol: "10",
-    all: "a2:j"
+    calendarStartCol: "12",
+    calendarEndCol: "13",
+    all: "a2:m"
 }
 
 function getAllEventIds() {
     let all = evtMaster.getRange(EventMasterDataMap.id).getValues().filter(String);
     return all.map(r => r[0]);
+}
+
+function getCalendarStartById(evt) {
+    return getColumnByEventId(EventMasterDataMap.calendarStartCol - 1, evt);
+}
+
+function getCalendarEndById(evt) {
+    return getColumnByEventId(EventMasterDataMap.calendarEndCol - 1, evt);
 }
 
 function getStatusById(evt) {

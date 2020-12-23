@@ -25,7 +25,7 @@ function sendNotification(data) {
     MailApp.sendEmail({
         to: data.sendTo, 
         //bcc: supportEmail,
-        replyTo: supportEmail,
+        replyTo: eventsReplyTo,
         subject: "MRAA Event Registration", 
         htmlBody: body,
         attachments: [

@@ -1,4 +1,4 @@
-let testEvent = '2F5CB12';
+let testEvent = '73CB67';
 
 function testGetAllEventIds() {
     console.log(getAllEventIds());
@@ -81,4 +81,14 @@ function testSendNotification() {
         sendTo: "jamesgreen.311@gmail.com" // testing only
     }
     sendNotification(eventInfo);    
+}
+
+function testGetCalendarStart() {
+    let c = getCalendarStart(testEvent);
+    console.log(c);
+}
+
+function testGetCalendarEnd() {
+    let c = getCalendarEnd(testEvent);
+    console.log(c);
 }
