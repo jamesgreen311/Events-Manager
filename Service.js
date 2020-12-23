@@ -13,6 +13,7 @@ function getRangeByName(n) {
 function sendNotification(data) {
     const regForm = "https://script.google.com/macros/s/AKfycbw9yov3sDA-4K0N4K5bdj_78HyM6idKyGUmz_Cv9oIHPpGKGzc/exec?v=reg&id=73CB67";
     const eventsPage = "https://metrorichmondart.org/meetings-critiques/";
+    const zoomContent = `To Join Zoom Meeting<br>${data.zoomLink}<br><br>Meeting ID: ${data.zoomMeetingId}<br>Passcode: ${data.zoomPasscode}<br><br>`
     const cal = ics();
     cal.addEvent(data.title, data.subtitle, data.location, data.start, data.end);
     const attach = cal.build();
@@ -20,7 +21,7 @@ function sendNotification(data) {
     const body = `Thank you for registering for the ${data.title} <br><br>
         ${contactInfo}
         If you need a reminder about event details, please revisit the <a href='${regForm}'>registration form</a> or the MRAA website 
-        <a href='${eventsPage}'>Events page</a>`;
+        <a href='${eventsPage}'>Events page</a><br><br>${zoomContent}`;
     const blob = Utilities.newBlob(attach, "text/calendar", "event.ics");
     //console.log(attach);
     MailApp.sendEmail({

@@ -38,7 +38,9 @@ function saveToSheet(data) {
       start: getCalendarStartById(evtId),
       end: getCalendarEndById(evtId),
       contactEmail: getContactEmailById(evtId),
-      zoomLink: "",
+      zoomLink: getZoomLinkById(evtId),
+      zoomMeetingId: getZoomMeetingIdById(evtId),
+      zoomPasscode: getZoomPasscodeById(evtId),
       // sendTo: data[4],
       sendTo: "jamesgreen.311@gmail.com" // testing only
     }

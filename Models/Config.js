@@ -36,7 +36,22 @@ EventMasterDataMap = {
     contactEmailCol: "10",
     calendarStartCol: "12",
     calendarEndCol: "13",
-    all: "a2:m"
+    zoomLinkCol: "14",
+    zoomMeetingIdCol: "15",
+    zoomPasscodeCol: "16",
+    all: "a2:p"
+}
+
+function getZoomLinkById(evt) {
+    return getColumnByEventId(EventMasterDataMap.zoomLinkCol - 1, evt);
+}
+
+function getZoomMeetingIdById(evt) {
+    return getColumnByEventId(EventMasterDataMap.zoomMeetingIdCol - 1, evt);
+}
+
+function getZoomPasscodeById(evt) {
+    return getColumnByEventId(EventMasterDataMap.zoomPasscodeCol - 1, evt);
 }
 
 function getAllEventIds() {
