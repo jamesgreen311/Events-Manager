@@ -21,7 +21,7 @@
             <h1 class="mraa-header">MRAA Event List</h1>
             <h2 class="mraa-sub-header mb-3">Current and Planned Events</h2>
     <? let evt = getAllEventIds(); 
-    for (let i=0; i<evt.length; i++) {  
+    for (let i=evt.length; i>=0; i--) {  
         let status = getStatusById(evt[i]);
     ?>
             <div class="row mb-4">
