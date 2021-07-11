@@ -1,0 +1,38 @@
+<h5 class="text-right">* <span class="badge badge-secondary">Required</span></h5>
+<form id="frmMain">
+    <div class="form-group">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">First Name *</span>
+        </div>
+        <input type="text" class="form-control" id="firstName" aria-label="First Name" required />
+        <div class="invalid-feedback">First name is required</div>
+        <div class="input-group-prepend ml-3">
+          <span class="input-group-text">Last Name *</span>
+        </div>
+        <input type="text" class="form-control" id="lastName" aria-label="Last Name" required />
+        <div class="invalid-feedback">Last name is required</div>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Email *</span>
+      </div>
+      <input type="email" class="form-control" id="emailAddress" aria-label="Email"
+        placeholder="Enter a valid email address" required />
+      <div class="input-group-prepend ml-3">
+        <span class="input-group-text">Phone</span>
+      </div>
+      <input type="tel" class="form-control" id="phoneNumber" aria-label="Phone"
+        placeholder="Requested format 999 999-9999" />
+    </div>
+
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Questions</span>
+      </div>
+      <textarea class="form-control" aria-label="Questions" id="question"></textarea>
+    </div>
+
+  </form>

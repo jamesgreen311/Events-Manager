@@ -88,7 +88,10 @@
       </div>
 
       <? if (status === 'Open') { ?>
-      <?!= include("Includes/html/form"); ?>
+        <?!= include("Includes/html/form"); ?>
+      <? } else { ?>
+        <h1 class="my-2 text-center">TESTING</h1>
+        <?!= include("Includes/html/form-test"); ?> 
       <? } ?>
       <div id="messageAlert" class="alert alert-success mt-4 mraa-alert" role="alert" style="display: none;">
         <h4 class="alert-heading">Save Successful</h4>

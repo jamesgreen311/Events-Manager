@@ -20,7 +20,7 @@
         <div class="container mraa-container pt-3 pb-3">
             <h1 class="mraa-header">MRAA Event List</h1>
             <h2 class="mraa-sub-header mb-3">Current and Planned Events</h2>
-    <? 
+            <? 
     let evt = getAllEventIds(); 
     for (let i=0; i<evt.length; i++) {  
         let status = getStatusById(evt[i]);
@@ -35,7 +35,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><?= getSubTitleById(evt[i]); ?></h5>
                             <p class="card-text"><?= getLocationById(evt[i]); ?></p>
-                            <? if (status === "Open") { ?>
+                            <? if (status === "Open" || status === "Testing") { ?>
                             <a href="<?= ScriptApp.getService().getUrl(); ?>?v=reg&id=<?= evt[i] ?>"
                                 class="btn btn-primary mraa-button-primary">Sign Up</a>
                             <? } ?>
@@ -45,6 +45,8 @@
                                 Upcoming
                             <? } else if (status === "Open") { ?>
                                 Registration Open
+                            <? } else if (status === "Testing") { ?>
+                                Testing
                             <? } else { ?>
                                 Registration Closed
                             <? } ?>
@@ -53,7 +55,7 @@
                 </div>
                 <div class="col-3"></div>
             </div>
-    <? } ?>
+            <? } ?>
         </div>
     </div>
 
